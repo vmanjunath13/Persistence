@@ -1,23 +1,26 @@
-package ennate.io.simple;
+package ennate.io.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
-public class Employee {
-
+public class User {
     @Id
+    @Column(columnDefinition = "VARCHAR(36)")
     private String id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
+    private Address address;
 
-    public Employee() {
+    public User() {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Employee(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email) {
         this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,4 +58,23 @@ public class Employee {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
 }
